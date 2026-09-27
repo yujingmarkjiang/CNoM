@@ -1,0 +1,6 @@
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY build/cnomd /usr/local/bin/cnomd
+ENV CNOM_API_KEY=""
+EXPOSE 8080
+ENTRYPOINT ["cnomd"]

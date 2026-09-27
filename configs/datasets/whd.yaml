@@ -1,0 +1,10 @@
+adapter: generic_json
+root: /data/workplace_hazards
+annotations: /data/workplace_hazards/annotations.json
+output: data/whd.parquet
+json_records_key: samples
+path_key: video
+label_key: label
+split_key: split
+start_key: start_s
+end_key: end_s

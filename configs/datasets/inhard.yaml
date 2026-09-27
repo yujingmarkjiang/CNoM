@@ -1,0 +1,8 @@
+adapter: subject_action_folders
+root: /data/InHARD
+output: data/inhard.parquet
+subject_pattern: "Subject*"
+action_pattern: "Action*"
+video_glob: "**/*.{mp4,avi,mov}"
+split_strategy: leave_one_subject_out
+held_out_subject: Subject16

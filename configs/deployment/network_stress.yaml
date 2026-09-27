@@ -1,0 +1,30 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/network_stress
+stress:
+  target_url: https://127.0.0.1:8443/v1/events
+  api_key_env: CNOM_API_KEY
+  manifest: data/stress_clips.parquet
+  repetitions: 5
+  concurrency: 24
+  concurrent_streams: 24
+  cloud_workers: 1
+  send_requests: true
+  verify_tls: true
+  ca_bundle: null
+  http2: true
+  max_event_age_s: 1800
+  retry_backoff_s: 1
+  profiles:
+    - {name: nominal, bandwidth_mbps: 82, rtt_ms: 18, jitter_ms: 4, packet_loss_percent: 0.05}
+    - {name: 100_mbps, bandwidth_mbps: 100, rtt_ms: 20, jitter_ms: 0, packet_loss_percent: 0}
+    - {name: 20_mbps, bandwidth_mbps: 20, rtt_ms: 40, jitter_ms: 0, packet_loss_percent: 0}
+    - {name: 10_mbps, bandwidth_mbps: 10, rtt_ms: 60, jitter_ms: 0, packet_loss_percent: 0}
+    - {name: 5_mbps, bandwidth_mbps: 5, rtt_ms: 80, jitter_ms: 0, packet_loss_percent: 0}
+    - {name: 1_mbps, bandwidth_mbps: 1, rtt_ms: 100, jitter_ms: 0, packet_loss_percent: 0}
+    - {name: loss_2_percent, bandwidth_mbps: 20, rtt_ms: 40, jitter_ms: 10, packet_loss_percent: 2}
+    - {name: loss_5_percent, bandwidth_mbps: 20, rtt_ms: 40, jitter_ms: 20, packet_loss_percent: 5}
+    - {name: outage_30_s, bandwidth_mbps: 0, rtt_ms: 40, jitter_ms: 10, packet_loss_percent: 100, outage_s: 30}
+    - {name: outage_300_s, bandwidth_mbps: 0, rtt_ms: 40, jitter_ms: 10, packet_loss_percent: 100, outage_s: 300}
+  tc_interface: eth0
+  apply_tc: false

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cnom"
+version = "1.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy", "pandas", "scipy", "scikit-learn", "PyYAML", "pydantic", "typer", "rich",
+  "opencv-python-headless", "torch", "torchvision", "safetensors", "tqdm", "pyarrow",
+]
+
+[project.optional-dependencies]
+train = ["transformers", "accelerate", "timm", "open-clip-torch", "statsmodels", "tensorboard"]
+deploy = ["fastapi", "uvicorn", "httpx", "sqlalchemy", "cryptography", "prometheus-client"]
+
+[project.scripts]
+cnom = "cnom.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["python"]

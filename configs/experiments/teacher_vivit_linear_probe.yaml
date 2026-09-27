@@ -1,0 +1,10 @@
+defaults:
+  - teacher_vivit.yaml
+output_dir: runs/teacher_vivit_linear_probe
+model:
+  initial_checkpoint: runs/public_pretraining/best.safetensors
+training:
+  epochs: 15
+  learning_rate: 0.0001
+  freeze_backbone: true
+  trainable_patterns: [classifier, score, fusion]

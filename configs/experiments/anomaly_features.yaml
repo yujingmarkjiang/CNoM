@@ -1,0 +1,17 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/anomaly_features
+features:
+  backbone:
+    name: video_swin_t
+    pretrained: true
+    num_classes: 9
+    checkpoint: null
+    image_size: 224
+    num_frames: 16
+  output_dir: artifacts/anomaly_features
+  manifest_output: data/anomaly_features.parquet
+  num_segments: 32
+  batch_size: 8
+  precision: bf16
+  overwrite: false

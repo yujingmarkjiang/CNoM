@@ -1,0 +1,26 @@
+defaults:
+  - ../base.yaml
+  - ../models/x3d_xs.yaml
+output_dir: runs/x3d_sentinel
+stage: teacher
+model:
+  name: x3d_xs
+  repository: facebookresearch/pytorchvideo
+  source: github
+  pretrained: true
+  num_classes: 9
+  image_size: 182
+  num_frames: 13
+training:
+  epochs: 30
+  batch_size: 16
+  gradient_accumulation: 2
+  learning_rate: 0.00005
+  warmup_epochs: 3
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.1
+  distillation_weight: 0.0
+  false_negative_weight: 0.5
+  hard_negative_weight: 0.0
+  positive_class_weight: 3.0

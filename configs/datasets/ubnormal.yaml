@@ -1,0 +1,6 @@
+adapter: anomaly_directories
+root: /data/UBnormal
+train_normal_glob: "train/**/*.{mp4,avi}"
+test_video_glob: "test/**/*.{mp4,avi}"
+annotations: /data/UBnormal/annotations
+output: data/ubnormal.parquet

@@ -1,0 +1,9 @@
+defaults:
+  - full_cnom.yaml
+output_dir: runs/sentinel_initial_distilled
+sentinel:
+  initial_checkpoint: runs/sentinel_supervised/best.safetensors
+hard_negatives:
+  manifest: null
+loss:
+  hard_negative_weight: 0.0

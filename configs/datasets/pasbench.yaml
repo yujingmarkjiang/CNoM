@@ -1,0 +1,9 @@
+adapter: streaming_json
+root: /data/PaSBench-Video
+annotations: /data/PaSBench-Video/annotations.json
+output: data/pasbench.parquet
+video_key: video
+risk_onset_key: risk_onset_s
+risk_end_key: risk_end_s
+safe_key: is_safe
+domain_key: domain

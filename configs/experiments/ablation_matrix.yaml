@@ -1,0 +1,37 @@
+defaults:
+  - full_cnom.yaml
+output_dir: runs/ablation_matrix
+stage: ablation
+sentinel:
+  initial_checkpoint: runs/sentinel_supervised/best.safetensors
+variants:
+  - {name: full_cnom, train: true}
+  - name: no_public_anomaly_pretraining
+    train: true
+    teacher_checkpoint: runs/teacher_vivit_no_public/best.safetensors
+    overrides: {teacher.checkpoint: runs/teacher_vivit_no_public/best.safetensors}
+  - name: linear_probe_teacher_adaptation
+    train: true
+    teacher_checkpoint: runs/teacher_vivit_linear_probe/best.safetensors
+    overrides: {teacher.checkpoint: runs/teacher_vivit_linear_probe/best.safetensors}
+  - name: no_object_grounding
+    train: true
+    teacher_checkpoint: runs/teacher_vivit_no_grounding/best.safetensors
+    overrides: {grounding.enabled: false, teacher.checkpoint: runs/teacher_vivit_no_grounding/best.safetensors}
+  - {name: no_distillation, train: true, overrides: {loss.distillation_weight: 0.0}}
+  - {name: no_false_negative_weighting, train: true, overrides: {loss.false_negative_weight: 0.0, loss.positive_class_weight: 1.0}}
+  - {name: no_hard_negative_refresh, train: true, overrides: {loss.hard_negative_weight: 0.0, hard_negatives.manifest: null}}
+  - {name: mean_aggregation, train: true, overrides: {sentinel.aggregation: mean}}
+  - {name: no_temporal_persistence, train: false, sentinel_checkpoint: runs/ablation_matrix/full_cnom/best.safetensors, overrides: {calibration.selected.window_frames: 1, calibration.selected.persistence: 1.0}}
+  - {name: no_merge_cooldown, train: false, sentinel_checkpoint: runs/ablation_matrix/full_cnom/best.safetensors, overrides: {calibration.selected.merge_seconds: 0, calibration.selected.cooldown_seconds: 0}}
+  - {name: no_manual_review_route, train: false, sentinel_checkpoint: runs/ablation_matrix/full_cnom/best.safetensors, overrides: {calibration.selected.safe_threshold: 0.50, calibration.selected.unsafe_threshold: 0.50}}
+  - name: teacher_videomae
+    train: false
+    sentinel_checkpoint: runs/ablation_matrix/full_cnom/best.safetensors
+    teacher_checkpoint: runs/teacher_videomae/best.safetensors
+    overrides: {teacher.name: videomae, teacher.pretrained_id: MCG-NJU/videomae-base-finetuned-kinetics, teacher.num_frames: 16, teacher.image_size: 224, teacher.checkpoint: runs/teacher_videomae/best.safetensors}
+  - name: teacher_video_swin
+    train: false
+    sentinel_checkpoint: runs/ablation_matrix/full_cnom/best.safetensors
+    teacher_checkpoint: runs/teacher_video_swin/best.safetensors
+    overrides: {teacher.name: video_swin_t, teacher.pretrained_id: null, teacher.num_frames: 32, teacher.image_size: 224, teacher.checkpoint: runs/teacher_video_swin/best.safetensors}

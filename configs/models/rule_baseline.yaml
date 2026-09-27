@@ -1,0 +1,11 @@
+name: rule_baseline
+backend: rules
+person_score_threshold: 0.45
+zone_overlap_threshold: 0.20
+persistence_frames: 20
+persistence_ratio: 0.55
+machine_state_required: false
+class_rules:
+  near_moving_parts: [person_in_machine_zone, machine_moving]
+  missing_safety_guard: [guard_absent, machine_energized]
+  under_suspended_load: [person_in_load_zone, load_suspended]

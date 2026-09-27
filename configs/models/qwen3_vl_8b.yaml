@@ -1,0 +1,3 @@
+name: qwen3_vl_8b
+pretrained_id: Qwen/Qwen3-VL-8B-Instruct
+num_classes: 9

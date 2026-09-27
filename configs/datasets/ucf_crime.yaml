@@ -1,0 +1,7 @@
+adapter: anomaly_split_lists
+root: /data/UCF-Crime
+train_list: /data/UCF-Crime/Train.list
+test_list: /data/UCF-Crime/Test.list
+annotations: /data/UCF-Crime/Temporal_Anomaly_Annotation.txt
+output: data/ucf_crime.parquet
+normal_tokens: [Normal]

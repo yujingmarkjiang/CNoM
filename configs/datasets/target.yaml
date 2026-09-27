@@ -1,0 +1,29 @@
+adapter: target_annotations
+root: /data/hs_guard
+annotations: /data/hs_guard/annotations/events.csv
+output: data/target.parquet
+events_output: data/target_events.parquet
+video_glob: "videos/**/*.{mp4,avi,mov,mkv}"
+label_column: class_name
+start_column: onset_s
+end_column: offset_s
+source_column: recording_id
+camera_column: camera_id
+scene_column: zone_id
+worker_column: worker_proxy
+split_column: split
+labels:
+  safe_background: 0
+  no_fall_protection: 1
+  leaning_on_machine: 2
+  near_moving_parts: 3
+  missing_safety_guard: 4
+  loose_clothing: 5
+  under_suspended_load: 6
+  machine_vibration: 7
+  unsafe_tool_posture: 8
+safe_sampling:
+  segment_s: 8.0
+  stride_s: 12.0
+  exclusion_margin_s: 4.0
+  max_per_source: 50

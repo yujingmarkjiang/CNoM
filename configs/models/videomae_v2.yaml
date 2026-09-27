@@ -1,0 +1,4 @@
+name: videomae_v2
+pretrained_id: OpenGVLab/VideoMAEv2-Base
+num_classes: 9
+pretrained: true

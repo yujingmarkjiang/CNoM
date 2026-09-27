@@ -1,0 +1,54 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/edge
+edge:
+  model_path: artifacts/sentinel.ts
+  device: cuda
+  precision: fp16
+  sources:
+    - id: camera_01
+      uri: rtsp://127.0.0.1/live/camera_01
+      camera_id: camera_01
+      zone_id: zone_01
+  analyzed_fps: 10
+  image_size: 224
+  frame_threshold: 0.30
+  window_frames: 20
+  persistence: 0.55
+  merge_seconds: 3
+  cooldown_seconds: 8
+  pre_roll_s: 1.6
+  decision_post_roll_s: 0.4
+  decision_max_clip_s: 5.0
+  reset_persistence: 0.20
+  reset_seconds: 2.0
+  output_width: 640
+  output_height: 360
+  codec: mp4v
+  spool_dir: spool
+  spool_database: spool/spool.db
+  spool_max_bytes: 53687091200
+  spool_max_items: 10000
+  spool_max_age_s: 1800
+  encrypt_spool: true
+  encryption_key_env: CNOM_SPOOL_KEY
+  upload_url: https://127.0.0.1:8443/v1/events
+  api_key_env: CNOM_API_KEY
+  allow_unauthenticated: false
+  verify_tls: true
+  client_certificate: null
+  client_key: null
+  connect_timeout_s: 10
+  request_timeout_s: 120
+  retry_min_s: 1
+  retry_max_s: 60
+  upload_lease_s: 300
+  upload_max_attempts: 20
+  stream_reconnect_s: 2
+  stream_read_failure_limit: 20
+  source_fps_fallback: 25
+  http2: true
+  ca_bundle: null
+  heartbeat_url: https://127.0.0.1:8443/v1/health/edge
+  heartbeat_s: 30
+  health_port: 9101

@@ -1,0 +1,4 @@
+name: mobilenetv4_hybrid_m
+num_classes: 9
+num_heads: 8
+pretrained: true

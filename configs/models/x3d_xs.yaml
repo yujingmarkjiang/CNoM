@@ -1,0 +1,11 @@
+name: x3d_xs
+backend: torchhub
+repository: facebookresearch/pytorchvideo
+source: github
+pretrained: true
+num_classes: 9
+image_size: 182
+num_frames: 13
+dropout: 0.2
+mean: [0.45, 0.45, 0.45]
+std: [0.225, 0.225, 0.225]

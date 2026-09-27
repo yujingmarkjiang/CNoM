@@ -1,0 +1,4 @@
+name: internvideo2
+pretrained_id: OpenGVLab/InternVideo2-Stage2_1B-224p-f4
+num_classes: 9
+pretrained: true

@@ -1,0 +1,43 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/full_cnom
+stage: distillation
+teacher:
+  name: vivit
+  pretrained_id: google/vivit-b-16x2-kinetics400
+  checkpoint: runs/teacher_vivit/best.safetensors
+  num_classes: 9
+  num_frames: 32
+  image_size: 224
+  freeze: true
+sentinel:
+  name: mobilenetv3_sentinel
+  variant: large
+  pretrained: true
+  shared_backbone: true
+  initial_checkpoint: runs/sentinel_initial_distilled/best.safetensors
+  checkpoint: null
+  num_heads: 8
+  num_classes: 9
+  num_frames: 32
+  image_size: 224
+  lse_temperature: 8.0
+hard_negatives:
+  manifest: data/hard_negatives.parquet
+  label_quality_column: adjudication_status
+  accepted_statuses: [confirmed_safe, policy_exception]
+training:
+  epochs: 40
+  batch_size: 32
+  gradient_accumulation: 2
+  learning_rate: 0.0003
+  warmup_epochs: 3
+  monitor: validation_recall_lower_bound
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.0
+  distillation_weight: 0.7
+  false_negative_weight: 1.0
+  hard_negative_weight: 0.5
+  positive_class_weight: 4.0
+  distillation_temperature: 3.0

@@ -1,0 +1,8 @@
+adapter: video_qa_json
+root: /data/iSafetyBench
+annotations: /data/iSafetyBench/benchmark.json
+output: data/isafetybench.parquet
+video_key: video
+question_key: question
+answer_key: answer
+category_key: hazard_category

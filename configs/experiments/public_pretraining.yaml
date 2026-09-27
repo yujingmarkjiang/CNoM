@@ -1,0 +1,26 @@
+defaults:
+  - ../base.yaml
+  - ../models/vivit.yaml
+output_dir: runs/public_pretraining
+stage: public_pretraining
+dataset:
+  manifests:
+    - data/ucf_crime.parquet
+    - data/shanghaitech.parquet
+    - data/xd_violence.parquet
+    - data/ubnormal.parquet
+  dataset_weights: [1.0, 1.0, 1.0, 1.0]
+  num_frames: 32
+  binary_labels: true
+model:
+  name: vivit
+  num_classes: 2
+training:
+  epochs: 20
+  batch_size: 8
+  gradient_accumulation: 4
+  learning_rate: 0.00002
+  warmup_epochs: 2
+
+grounding:
+  enabled: false

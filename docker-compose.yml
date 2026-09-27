@@ -1,0 +1,14 @@
+services:
+  cloud:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cloud
+    ports: ["8080:8080"]
+    environment:
+      CNOM_API_KEY: ${CNOM_API_KEY:-}
+  train:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.train
+    profiles: ["train"]
+    volumes: ["./artifacts:/app/artifacts", "./configs:/app/configs"]

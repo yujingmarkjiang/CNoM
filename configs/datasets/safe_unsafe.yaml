@@ -1,0 +1,10 @@
+adapter: class_folders
+root: /data/safe_unsafe_workplace
+output: data/safe_unsafe.parquet
+split_strategy: grouped_random
+validation_fraction: 0.15
+test_fraction: 0.20
+group_from_parent_depth: 2
+class_map:
+  safe: 0
+  unsafe: 1

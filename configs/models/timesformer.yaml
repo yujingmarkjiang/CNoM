@@ -1,0 +1,9 @@
+name: timesformer
+backend: transformers
+pretrained_id: facebook/timesformer-base-finetuned-k400
+pretrained: true
+num_classes: 9
+image_size: 224
+num_frames: 8
+dropout: 0.2
+gradient_checkpointing: false

@@ -1,0 +1,23 @@
+defaults:
+  - full_cnom.yaml
+output_dir: runs/hard_negative_mining
+hard_negative_mining:
+  split: train
+  checkpoint: runs/full_cnom/best.safetensors
+  model:
+    name: mobilenetv3_sentinel
+    variant: large
+    pretrained: false
+    shared_backbone: true
+    num_heads: 8
+    num_classes: 9
+    num_frames: 32
+    image_size: 224
+    aggregation: lse
+    lse_temperature: 8.0
+  score_threshold: 0.70
+  minimum_separation_s: 3.0
+  max_per_source: 50
+  max_candidates: 50000
+  initial_status: pending_review
+  output: data/hard_negative_candidates.parquet

@@ -1,0 +1,6 @@
+adapter: anomaly_directories
+root: /data/ShanghaiTech
+train_normal_glob: "training/videos/**/*.{avi,mp4}"
+test_video_glob: "testing/videos/**/*.{avi,mp4}"
+test_mask_glob: "testing/test_frame_mask/*.npy"
+output: data/shanghaitech.parquet

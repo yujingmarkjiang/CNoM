@@ -1,0 +1,30 @@
+defaults:
+  - ../base.yaml
+  - ../models/mobilenetv3_sentinel.yaml
+output_dir: runs/sentinel_supervised
+stage: sentinel_supervised
+model:
+  name: mobilenetv3_sentinel
+  variant: large
+  pretrained: true
+  shared_backbone: true
+  num_heads: 8
+  num_classes: 9
+  num_frames: 32
+  image_size: 224
+  aggregation: lse
+  lse_temperature: 8.0
+training:
+  epochs: 35
+  batch_size: 32
+  gradient_accumulation: 2
+  learning_rate: 0.0003
+  warmup_epochs: 3
+  monitor: validation_recall_lower_bound
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.0
+  distillation_weight: 0.0
+  false_negative_weight: 1.0
+  hard_negative_weight: 0.0
+  positive_class_weight: 4.0

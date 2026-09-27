@@ -1,0 +1,8 @@
+name: rtfm
+backend: native
+feature_dim: 2048
+hidden_dim: 512
+num_segments: 32
+top_k: 3
+dropout: 0.7
+num_classes: 2

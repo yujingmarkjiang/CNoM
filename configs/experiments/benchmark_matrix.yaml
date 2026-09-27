@@ -1,0 +1,19 @@
+defaults:
+  - full_cnom.yaml
+output_dir: runs/benchmark_matrix
+stage: benchmark
+dataset:
+  rule_signals: data/rule_baseline_events.parquet
+systems:
+  - {name: object_zone_persistence_rules, model_config: ../models/rule_baseline.yaml, mode: rules}
+  - {name: mobilenetv3_edge_only, model_config: ../models/mobilenetv3_sentinel.yaml, checkpoint: runs/sentinel_supervised/best.safetensors, mode: edge_only}
+  - {name: x3d_xs_edge_only, model_config: ../models/x3d_xs.yaml, checkpoint: runs/x3d_sentinel/best.safetensors, mode: edge_only}
+  - {name: vivit_cloud_only, model_config: ../models/vivit.yaml, checkpoint: runs/teacher_vivit/best.safetensors, mode: cloud_only}
+  - {name: videomae_cloud_only, model_config: ../models/videomae.yaml, checkpoint: runs/teacher_videomae/best.safetensors, mode: cloud_only}
+  - {name: timesformer_cloud_only, model_config: ../models/timesformer.yaml, checkpoint: runs/teacher_timesformer/best.safetensors, mode: cloud_only}
+  - {name: slowfast_cloud_only, model_config: ../models/slowfast_r50.yaml, checkpoint: runs/teacher_slowfast/best.safetensors, mode: cloud_only}
+  - {name: video_swin_cloud_only, model_config: ../models/video_swin_t.yaml, checkpoint: runs/teacher_video_swin/best.safetensors, mode: cloud_only}
+  - {name: confidence_offload, mode: confidence_offload, upload_budget: 0.068}
+  - {name: random_offload, mode: random_offload, upload_budget: 0.068}
+  - {name: cnom_without_teacher_guidance, mode: cascade, sentinel_checkpoint: runs/sentinel_supervised/best.safetensors, teacher_checkpoint: runs/teacher_vivit/best.safetensors}
+  - {name: cnom_full, mode: cascade, sentinel_checkpoint: runs/full_cnom/best.safetensors, teacher_checkpoint: runs/teacher_vivit/best.safetensors}

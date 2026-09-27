@@ -1,0 +1,16 @@
+name: mobilenetv3_sentinel
+backend: torchvision
+variant: large
+pretrained: true
+shared_backbone: true
+num_heads: 8
+num_classes: 9
+image_size: 224
+num_frames: 32
+dropout: 0.2
+head_hidden_dim: 512
+aggregation: max
+lse_temperature: 8.0
+quantization: none
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]

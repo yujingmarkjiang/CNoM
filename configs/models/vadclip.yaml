@@ -1,0 +1,18 @@
+name: vadclip
+backend: open_clip
+pretrained_id: ViT-B-16
+pretrained_weights: laion2b_s34b_b88k
+feature_dim: 512
+hidden_dim: 512
+num_segments: 32
+num_layers: 4
+num_heads: 8
+dropout: 0.2
+prompts:
+  normal: "a video of normal and safe industrial work"
+  anomaly: "a video of unsafe industrial human machine interaction"
+num_classes: 2
+
+mean: [0.48145466, 0.4578275, 0.40821073]
+std: [0.26862954, 0.26130258, 0.27577711]
+freeze_clip: true

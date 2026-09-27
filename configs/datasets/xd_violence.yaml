@@ -1,0 +1,6 @@
+adapter: anomaly_split_lists
+root: /data/XD-Violence
+train_list: /data/XD-Violence/train.list
+test_list: /data/XD-Violence/test.list
+output: data/xd_violence.parquet
+normal_tokens: [label_A]

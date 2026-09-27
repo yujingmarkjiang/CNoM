@@ -1,0 +1,39 @@
+seed: 2027
+labels:
+  - safe_background
+  - no_fall_protection
+  - leaning_on_machine
+  - near_moving_parts
+  - missing_safety_guard
+  - loose_clothing
+  - under_suspended_load
+  - machine_vibration
+  - unsafe_tool_posture
+calibration:
+  selected:
+    frame_threshold: 0.30
+    window_frames: 20
+    persistence: 0.55
+    merge_seconds: 3
+    cooldown_seconds: 8
+    safe_threshold: 0.985
+    unsafe_threshold: 0.80
+  non_suppressible_classes: [near_moving_parts, under_suspended_load]
+  temperature: 1.34
+  target_recall_lower_bound: 0.95
+  max_p95_latency_s: 3.0
+  max_review_items_per_shift: 40
+runtime:
+  analyzed_fps: 10
+  pre_roll_s: 1.6
+  post_roll_s: 1.6
+  max_clip_s: 12.0
+loss:
+  supervised_weight: 1.0
+  distillation_weight: 0.7
+  distillation_temperature: 3.0
+  false_negative_weight: 1.0
+  hard_negative_weight: 0.5
+  positive_class_weight: 4.0
+cloud:
+  addr: ":8080"

@@ -1,0 +1,7 @@
+defaults:
+  - full_cnom.yaml
+hard_negatives:
+  manifest: data/hard_negative_candidates_adjudicated.parquet
+  replay_manifest: data/hard_negatives.parquet
+  label_quality_column: adjudication_status
+  accepted_statuses: [confirmed_safe, policy_exception]

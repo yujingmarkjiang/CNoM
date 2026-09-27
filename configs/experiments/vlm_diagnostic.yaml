@@ -1,0 +1,25 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/vlm_diagnostic
+stage: vlm
+manifest: data/target_test_clips.parquet
+frame_samples: 32
+providers:
+  - name: provider_a
+    adapter: openai_compatible
+    base_url_env: VLM_A_BASE_URL
+    api_key_env: VLM_A_API_KEY
+    model_env: VLM_A_MODEL
+  - name: provider_b
+    adapter: openai_compatible
+    base_url_env: VLM_B_BASE_URL
+    api_key_env: VLM_B_API_KEY
+    model_env: VLM_B_MODEL
+request:
+  temperature: 0.0
+  max_tokens: 300
+  retries: 3
+  timeout_s: 120
+  response_format: json
+prompt_file: examples/vlm_prompt.txt
+cache_dir: artifacts/vlm_responses

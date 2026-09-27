@@ -1,0 +1,15 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/low_label
+stage: low_label
+budgets: [100, 250, 500]
+seeds: [2027, 2028, 2029, 2030, 2031]
+methods:
+  - mobilenetv3_supervised
+  - vivit_supervised
+  - cnom_without_distillation
+  - cnom_full
+sampling:
+  group_field: source_id
+  preserve_safe_ratio: 1.0
+  fixed_validation_and_test: true

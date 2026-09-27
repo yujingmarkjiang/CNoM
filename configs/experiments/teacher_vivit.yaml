@@ -1,0 +1,22 @@
+defaults:
+  - ../base.yaml
+  - ../models/vivit.yaml
+output_dir: runs/teacher_vivit
+stage: teacher
+model:
+  name: vivit
+  pretrained_id: google/vivit-b-16x2-kinetics400
+  num_classes: 9
+  initial_checkpoint: runs/public_pretraining/best.safetensors
+training:
+  epochs: 30
+  batch_size: 8
+  gradient_accumulation: 4
+  learning_rate: 0.00001
+  warmup_epochs: 5
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.1
+  distillation_weight: 0.0
+  false_negative_weight: 0.0
+  hard_negative_weight: 0.0

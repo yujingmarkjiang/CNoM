@@ -1,0 +1,44 @@
+defaults:
+  - ../default.yaml
+output_dir: runs/cloud
+cloud:
+  host: 0.0.0.0
+  port: 8443
+  database_url: sqlite:///artifacts/cloud_jobs.db
+  storage_backend: local
+  storage_root: artifacts/cloud_clips
+  s3_bucket: null
+  s3_prefix: cnom
+  s3_endpoint_url: null
+  s3_region: null
+  s3_server_side_encryption: AES256
+  api_key_env: CNOM_API_KEY
+  allow_unauthenticated: false
+  max_upload_bytes: 104857600
+  accepted_mime_types: [video/mp4, video/avi, video/quicktime, application/octet-stream]
+  teacher:
+    name: vivit
+    checkpoint: runs/teacher_vivit/best.safetensors
+    pretrained_id: google/vivit-b-16x2-kinetics400
+    device: cuda
+    precision: bf16
+    temperature: 1.34
+    num_frames: 32
+    image_size: 224
+    batch_size: 8
+  routing:
+    safe_threshold: 0.985
+    unsafe_threshold: 0.80
+    non_suppressible_classes: [near_moving_parts, under_suspended_load]
+  worker_poll_s: 0.25
+  job_lease_s: 300
+  job_max_attempts: 5
+  callback_timeout_s: 20
+  metrics_port: 9102
+  audit_log: artifacts/cloud_audit.jsonl
+  tls_certfile: null
+  tls_keyfile: null
+  proxy_headers: false
+  forwarded_allow_ips: 127.0.0.1
+  callback_allowlist: []
+  callback_token_env: CNOM_CALLBACK_TOKEN

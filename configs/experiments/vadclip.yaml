@@ -1,0 +1,36 @@
+defaults:
+  - ../base.yaml
+  - ../models/vadclip.yaml
+output_dir: runs/vadclip
+stage: anomaly
+dataset:
+  manifest: data/public_anomaly.parquet
+  binary_labels: true
+  num_frames: 32
+  image_size: 224
+  class_balance: weighted
+model:
+  name: vadclip
+  pretrained_id: ViT-B-16
+  pretrained_weights: laion2b_s34b_b88k
+  hidden_dim: 512
+  num_layers: 4
+  num_heads: 8
+  dropout: 0.2
+  num_classes: 2
+  prompts:
+    normal: a video of normal and safe industrial work
+    anomaly: a video of unsafe industrial human machine interaction
+training:
+  epochs: 20
+  batch_size: 4
+  gradient_accumulation: 8
+  learning_rate: 0.00001
+  weight_decay: 0.05
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.1
+  distillation_weight: 0.0
+  false_negative_weight: 0.5
+  hard_negative_weight: 0.0
+  positive_class_weight: 2.0

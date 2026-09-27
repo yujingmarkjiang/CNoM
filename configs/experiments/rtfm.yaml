@@ -1,0 +1,32 @@
+defaults:
+  - ../base.yaml
+  - ../models/rtfm.yaml
+output_dir: runs/rtfm
+auto_resume: true
+stage: anomaly
+dataset:
+  manifest: data/anomaly_features.parquet
+  feature_column: feature_path
+  binary_labels: true
+  class_balance: weighted
+model:
+  name: rtfm
+  feature_dim: 768
+  hidden_dim: 512
+  top_k: 3
+  dropout: 0.7
+  num_classes: 2
+training:
+  epochs: 50
+  batch_size: 32
+  gradient_accumulation: 1
+  learning_rate: 0.0001
+  weight_decay: 0.0005
+  early_stopping_patience: 10
+loss:
+  supervised_weight: 1.0
+  supervised_contrastive_weight: 0.0
+  distillation_weight: 0.0
+  false_negative_weight: 0.5
+  hard_negative_weight: 0.0
+  positive_class_weight: 2.0

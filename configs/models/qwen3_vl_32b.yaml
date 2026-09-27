@@ -1,0 +1,3 @@
+name: qwen3_vl_32b
+pretrained_id: Qwen/Qwen3-VL-32B-Instruct
+num_classes: 9

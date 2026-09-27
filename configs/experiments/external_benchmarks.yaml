@@ -1,0 +1,52 @@
+defaults:
+  - ../base.yaml
+output_dir: runs/external_benchmarks
+stage: external
+checkpoint: runs/full_cnom/best.safetensors
+benchmarks:
+  - dataset: safe_unsafe
+    config: ../datasets/safe_unsafe.yaml
+    protocols: [zero_shot, linear_probe, full_finetune]
+    metric: macro_f1
+  - dataset: whd
+    config: ../datasets/whd.yaml
+    protocols: [linear_probe, full_finetune]
+    metric: accuracy
+  - dataset: inhard
+    config: ../datasets/inhard.yaml
+    protocols: [linear_probe, full_finetune]
+    metric: macro_f1
+  - dataset: isafetybench
+    config: ../datasets/isafetybench.yaml
+    protocols: [vlm_zero_shot]
+    metric: accuracy
+    predictions: runs/vlm_diagnostic/isafetybench_predictions.parquet
+  - dataset: pasbench
+    config: ../datasets/pasbench.yaml
+    protocols: [streaming]
+    metric: warning_score
+    predictions: runs/pasbench/stream_predictions.parquet
+  - dataset: ucf_crime
+    config: ../datasets/ucf_crime.yaml
+    protocols: [anomaly]
+    model_config: ../models/rtfm.yaml
+    checkpoint: runs/ucf_crime_rtfm/best.safetensors
+    metric: frame_auc
+  - dataset: shanghaitech
+    config: ../datasets/shanghaitech.yaml
+    protocols: [anomaly]
+    model_config: ../models/rtfm.yaml
+    checkpoint: runs/shanghaitech_rtfm/best.safetensors
+    metric: frame_auc
+  - dataset: xd_violence
+    config: ../datasets/xd_violence.yaml
+    protocols: [anomaly]
+    model_config: ../models/rtfm.yaml
+    checkpoint: runs/xd_violence_rtfm/best.safetensors
+    metric: average_precision
+  - dataset: ubnormal
+    config: ../datasets/ubnormal.yaml
+    protocols: [anomaly]
+    model_config: ../models/rtfm.yaml
+    checkpoint: runs/ubnormal_rtfm/best.safetensors
+    metric: frame_auc

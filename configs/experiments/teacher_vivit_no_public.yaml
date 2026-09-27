@@ -1,0 +1,5 @@
+defaults:
+  - teacher_vivit.yaml
+output_dir: runs/teacher_vivit_no_public
+model:
+  initial_checkpoint: null
